@@ -58,9 +58,15 @@ docker compose up -d
 `bento` (Redpanda Connect) binary must be installed and available in your PATH.
 
 ### CLI Wrapper
+Run a pipeline from the root directory:
+```bash
+bun run pipeline vendor-a-patient-sync
+```
+
+Or from the `pipelines` directory:
 ```bash
 cd pipelines
-bun run run vendor-a-patient-sync
+bun run pipeline vendor-a-patient-sync
 ```
 
 ### From TypeScript

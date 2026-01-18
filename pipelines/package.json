@@ -5,7 +5,7 @@
     "scripts": {
         "build": "ts-node scripts/build-all.ts",
         "typecheck": "tsc --noEmit",
-        "run": "ts-node scripts/run.ts"
+        "pipeline": "ts-node scripts/run.ts"
     },
     "dependencies": {
         "pipeli-sdk": "file:../sdk",

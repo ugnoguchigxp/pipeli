@@ -12,7 +12,8 @@
         "format": "biome format --write .",
         "typecheck": "bun run --filter '*' typecheck",
         "build": "bun run --filter '*' build",
-        "test": "bun run --filter '*' test"
+        "test": "bun run --filter '*' test",
+        "pipeline": "bun run --filter pipeli-pipelines pipeline"
     },
     "dependencies": {
         "zod": "^3.22.4",

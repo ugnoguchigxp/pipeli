@@ -11,8 +11,8 @@ const pipelineId = args[0];
 
 if (!pipelineId) {
     console.error('\x1b[31mError: Pipeline ID is required.\x1b[0m');
-    console.error('Usage:   bun run scripts/run.ts <pipeline-id>');
-    console.error('Example: bun run scripts/run.ts vendor-a-patient-sync');
+    console.error('Usage:   bun run pipeline <pipeline-id>');
+    console.error('Example: bun run pipeline vendor-a-patient-sync');
     process.exit(1);
 }
 

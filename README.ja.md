@@ -60,11 +60,15 @@ docker compose up -d
 実行環境には `bento` (Redpanda Connect) のバイナリがインストールされ、PATH が通っている必要があります。
 
 ### CLI Wrapper の使用
-`pipelines` パッケージには `bun run run` コマンドが用意されています。
+ルートディレクトリから直接実行する場合：
+```bash
+bun run pipeline vendor-a-patient-sync
+```
 
+`pipelines` ディレクトリに移動して実行する場合：
 ```bash
 cd pipelines
-bun run run vendor-a-patient-sync
+bun run pipeline vendor-a-patient-sync
 ```
 
 ### TypeScript (Node.js) からの利用
@@ -84,7 +88,7 @@ Rails アプリケーションからは、Wrapper スクリプトを `system` �
 def run_pipeline(pipeline_id)
   # pipelines ディレクトリのスクリプトを実行
   # 必要に応じて環境変数をセットしてください
-  cmd = "cd pipelines && bun run run #{pipeline_id}"
+  cmd = "cd pipelines && bun run pipeline #{pipeline_id}"
   
   unless system(cmd)
     raise "Pipeline execution failed: #{pipeline_id}"
