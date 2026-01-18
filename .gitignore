@@ -1,0 +1,60 @@
+# OS files
+.DS_Store
+Thumbs.db
+
+# Dependencies
+node_modules/
+.bun/
+
+# Build artifacts
+dist/
+sdk/dist/
+pipelines/dist/
+api/dist/
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Coverage
+sdk/coverage/
+api/coverage/
+coverage/
+*.lcov
+coverage_output.txt
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Database files
+*.db
+*.db-shm
+*.db-wal
+queue.db*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Temporary artifacts
+pipelines/src/test-*.ts
+pipelines/dist/test-*.yaml
+tmp/
+temp/
+*.tmp
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# TypeScript
+*.tsbuildinfo

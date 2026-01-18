@@ -1,0 +1,32 @@
+{
+    "name": "pipeli-workspace",
+    "private": true,
+    "workspaces": [
+        "sdk",
+        "pipelines",
+        "api"
+    ],
+    "scripts": {
+        "check": "biome check --write .",
+        "lint": "biome lint .",
+        "format": "biome format --write .",
+        "typecheck": "bun run --filter '*' typecheck",
+        "build": "bun run --filter '*' build",
+        "test": "bun run --filter '*' test"
+    },
+    "dependencies": {
+        "zod": "^3.22.4",
+        "js-yaml": "^4.1.0",
+        "drizzle-orm": "^0.30.0",
+        "pg": "^8.11.3"
+    },
+    "devDependencies": {
+        "@biomejs/biome": "^2.3.11",
+        "@types/js-yaml": "^4.0.9",
+        "@types/node": "^20.11.0",
+        "@types/pg": "^8.11.4",
+        "bun-types": "^1.0.0",
+        "drizzle-kit": "^0.20.14",
+        "typescript": "^5.3.3"
+    }
+}

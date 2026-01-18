@@ -1,0 +1,22 @@
+{
+    "name": "@pipeli/pipelines",
+    "version": "1.0.0",
+    "description": "Pipeli pipeline definitions",
+    "scripts": {
+        "build": "ts-node scripts/build-all.ts",
+        "typecheck": "tsc --noEmit",
+        "run": "ts-node scripts/run.ts"
+    },
+    "dependencies": {
+        "@pipeli/sdk": "file:../sdk",
+        "drizzle-orm": "^0.30.0",
+        "pg": "^8.11.3"
+    },
+    "devDependencies": {
+        "typescript": "^5.3.3",
+        "ts-node": "^10.9.2",
+        "@types/node": "^20.11.0",
+        "@types/pg": "^8.11.4",
+        "drizzle-kit": "^0.20.14"
+    }
+}

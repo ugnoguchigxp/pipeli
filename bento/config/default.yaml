@@ -1,0 +1,14 @@
+# Bento 共通設定 (Streams Manager)
+# このファイルでは HTTP API やロギング、共通リソースを定義します。
+# 実際のデータ処理フローは /streams/*.yaml に記述します。
+
+http:
+  address: "0.0.0.0:4195"
+  enabled: true
+
+logger:
+  level: DEBUG
+  format: logfmt
+
+metrics:
+  prometheus: {}

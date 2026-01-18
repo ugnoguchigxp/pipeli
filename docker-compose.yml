@@ -1,0 +1,76 @@
+# Pipeli Development Environment (v3.2)
+# 構成: Bento Runtime (WarpStream) + Anonymization API
+# ※ PostgreSQL は外部ネットワークのものを利用します。
+
+services:
+  # ============================================
+  # Anonymization API - GDPR/HIPAA準拠データ匿名化
+  # ============================================
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: ingestion-api
+    ports:
+      - "3001:3001"
+    environment:
+      - PORT=3001
+      - QUEUE_DB_PATH=/data/queue.db
+      - QUEUE_MAX_RETRIES=4
+      - QUEUE_CONCURRENCY=2
+      - BATCH_SIZE=500
+      - NODE_ENV=production
+    volumes:
+      - api-data:/data
+    networks:
+      - ingestion-network
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:3001/health" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    restart: unless-stopped
+
+  # ============================================
+  # Bento (WarpStream) - Stream Processor Runtime
+  # ============================================
+  bento:
+    image: ghcr.io/warpstreamlabs/bento:latest
+    container_name: ingestion-bento
+    ports:
+      - "4195:4195" # HTTP API / Metrics
+      - "8080:8080" # カスタム HTTP Input（検証用）
+    environment:
+      # 外部PostgreSQLへの接続情報（.envで設定）
+      - DATABASE_URL=${DATABASE_URL}
+    volumes:
+      # メイン設定ファイル
+      - ./bento/config/default.yaml:/bento.yaml:ro
+      # SDK (TypeScript) から生成された YAML 群をマウント
+      - ./pipelines/dist:/streams:ro
+    # 起動コマンド: ストリームモードまたは単体実行
+    command: [ "-c", "/bento.yaml", "streams", "/streams/*.yaml" ]
+    healthcheck:
+      test: [ "CMD", "wget", "-q", "--spider", "http://localhost:4195/ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 3
+    depends_on:
+      api:
+        condition: service_healthy
+    networks:
+      - ingestion-network
+      - external-db-network
+    restart: unless-stopped
+
+volumes:
+  api-data:
+    driver: local
+
+networks:
+  ingestion-network:
+    driver: bridge
+  # 外部データベースネットワーク（必要に応じて設定）
+  external-db-network:
+    external: true
+    name: ${EXTERNAL_DB_NETWORK:-postgres_default}
