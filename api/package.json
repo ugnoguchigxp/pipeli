@@ -2,6 +2,13 @@
     "name": "@pipeli/api",
     "version": "0.1.0",
     "description": "GDPR/HIPAA compliant data anonymization API service",
+    "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
+    "files": [
+        "src"
+    ],
     "type": "module",
     "scripts": {
         "dev": "bun run --watch src/index.ts",
