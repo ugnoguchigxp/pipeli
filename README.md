@@ -54,6 +54,9 @@ docker compose up -d
 
 ## 🏃‍♂️ Running Pipelines
 
+### Prerequisites
+`bento` (Redpanda Connect) binary must be installed and available in your PATH.
+
 ### CLI Wrapper
 ```bash
 cd pipelines
@@ -62,9 +65,9 @@ bun run run vendor-a-patient-sync
 
 ### From TypeScript
 ```typescript
-import { PipelineRunner } from '@pipeli/sdk';
+import { PipelineRunner } from 'pipeli-sdk';
 
-const runner = new PipelineRunner();
+const runner = new PipelineRunner({ distDir: './pipelines/dist' });
 await runner.run('vendor-a-patient-sync');
 ```
 
@@ -85,8 +88,8 @@ Since v1.1.0, vendor-specific differences in HL7 and fixed-width data can be def
 
 ### Example (Profile-based HL7 Pipeline)
 ```typescript
-import { Pipeline, Source, Transform, Sink, profileRegistry } from '@pipeli/sdk';
-import { patients } from '../../db/schema';
+import { Pipeline, Source, Transform, Sink, profileRegistry } from 'pipeli-sdk';
+import { patients } from './db/schema';
 
 const profile = profileRegistry.get('vendor_a', 'adt-profile');
 
@@ -106,7 +109,7 @@ const pipeline = new Pipeline({
   output: Sink.postgres({
     schema: patients,
     mode: 'upsert',
-    idempotencyKey: ['vendor', 'facility', 'sourceId'],
+    idempotencyKey: ['sourceId'],
     mapping: {
       vendor: { literal: 'vendor_a' },
       facility: { literal: 'hospital_001' },

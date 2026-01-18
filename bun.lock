@@ -3,7 +3,7 @@
   "configVersion": 1,
   "workspaces": {
     "": {
-      "name": "ingestion-adapter-workspace",
+      "name": "pipeli-workspace",
       "dependencies": {
         "drizzle-orm": "^0.30.0",
         "js-yaml": "^4.1.0",
@@ -21,7 +21,7 @@
       },
     },
     "api": {
-      "name": "@pipeli/api",
+      "name": "pipeli-api",
       "version": "0.1.0",
       "dependencies": {
         "@hono/zod-validator": "^0.7.6",
@@ -34,12 +34,12 @@
       },
     },
     "pipelines": {
-      "name": "@pipeli/pipelines",
+      "name": "pipeli-pipelines",
       "version": "1.0.0",
       "dependencies": {
-        "@pipeli/sdk": "file:../sdk",
         "drizzle-orm": "^0.30.0",
         "pg": "^8.11.3",
+        "pipeli-sdk": "file:../sdk",
       },
       "devDependencies": {
         "@types/node": "^20.11.0",
@@ -50,7 +50,7 @@
       },
     },
     "sdk": {
-      "name": "@pipeli/sdk",
+      "name": "pipeli-sdk",
       "version": "0.1.0",
       "dependencies": {
         "better-sqlite3": "^11.0.0",
@@ -163,12 +163,6 @@
     "@jridgewell/sourcemap-codec": ["@jridgewell/sourcemap-codec@1.5.5", "", {}, "sha512-cYQ9310grqxueWbl+WuIUIaiUaDcj7WOq5fVhEljNVgRfOUhY9fy2zTvfoqWsnebh8Sl70VScFbICvJnLKB0Og=="],
 
     "@jridgewell/trace-mapping": ["@jridgewell/trace-mapping@0.3.9", "", { "dependencies": { "@jridgewell/resolve-uri": "^3.0.3", "@jridgewell/sourcemap-codec": "^1.4.10" } }, "sha512-3Belt6tdc8bPgAtbcmdtNJlirVoTmEb5e2gC94PnkwEW9jI6CAHUeoG85tjWP5WquqfavoMtMwiG4P926ZKKuQ=="],
-
-    "@pipeli/api": ["@pipeli/api@workspace:api"],
-
-    "@pipeli/pipelines": ["@pipeli/pipelines@workspace:pipelines"],
-
-    "@pipeli/sdk": ["@pipeli/sdk@workspace:sdk"],
 
     "@rollup/rollup-android-arm-eabi": ["@rollup/rollup-android-arm-eabi@4.55.1", "", { "os": "android", "cpu": "arm" }, "sha512-9R0DM/ykwfGIlNu6+2U09ga0WXeZ9MRC2Ter8jnz8415VbuIykVuc6bhdrbORFZANDmTDvq26mJrEVTl8TdnDg=="],
 
@@ -465,6 +459,12 @@
     "picocolors": ["picocolors@1.1.1", "", {}, "sha512-xceH2snhtb5M9liqDsmEw56le376mTZkEX/jEb/RxNFyegNul7eNslCXP9FDj/Lcu0X8KEyMceP2ntpaHrDEVA=="],
 
     "picomatch": ["picomatch@4.0.3", "", {}, "sha512-5gTmgEY/sqK6gFXLIsQNH19lWb4ebPDLA4SdLP7dsWkIXHWlG66oPuVvXSGFPppYZz8ZDZq0dYYrbHfBCVUb1Q=="],
+
+    "pipeli-api": ["pipeli-api@workspace:api"],
+
+    "pipeli-pipelines": ["pipeli-pipelines@workspace:pipelines"],
+
+    "pipeli-sdk": ["pipeli-sdk@workspace:sdk"],
 
     "postcss": ["postcss@8.5.6", "", { "dependencies": { "nanoid": "^3.3.11", "picocolors": "^1.1.1", "source-map-js": "^1.2.1" } }, "sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg=="],
 

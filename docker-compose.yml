@@ -10,7 +10,7 @@ services:
     build:
       context: ./api
       dockerfile: Dockerfile
-    container_name: ingestion-api
+    container_name: pipeli-api
     ports:
       - "3001:3001"
     environment:
@@ -23,7 +23,7 @@ services:
     volumes:
       - api-data:/data
     networks:
-      - ingestion-network
+      - pipeli-network
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:3001/health" ]
       interval: 10s
@@ -36,7 +36,7 @@ services:
   # ============================================
   bento:
     image: ghcr.io/warpstreamlabs/bento:latest
-    container_name: ingestion-bento
+    container_name: pipeli-bento
     ports:
       - "4195:4195" # HTTP API / Metrics
       - "8080:8080" # カスタム HTTP Input（検証用）
@@ -59,7 +59,7 @@ services:
       api:
         condition: service_healthy
     networks:
-      - ingestion-network
+      - pipeli-network
       - external-db-network
     restart: unless-stopped
 
@@ -68,7 +68,7 @@ volumes:
     driver: local
 
 networks:
-  ingestion-network:
+  pipeli-network:
     driver: bridge
   # 外部データベースネットワーク（必要に応じて設定）
   external-db-network:

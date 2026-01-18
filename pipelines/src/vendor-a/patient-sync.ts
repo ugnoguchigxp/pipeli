@@ -1,4 +1,4 @@
-import { Pipeline, Sink, Source, Transform } from '@pipeli/sdk';
+import { Pipeline, Sink, Source, Transform } from 'pipeli-sdk';
 import { patients } from '../../../db/schema.js';
 
 const pipeline = new Pipeline({

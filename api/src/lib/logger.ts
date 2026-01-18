@@ -12,7 +12,7 @@ export interface Logger {
  * コンソールベースのロガー実装
  */
 export class ConsoleLogger implements Logger {
-    private readonly serviceTag = 'ingestion-adapter';
+    private readonly serviceTag = 'pipeli-api';
     private readonly componentTag = process.env.LOG_COMPONENT?.trim() || 'bun-hono';
 
     constructor(private level: 'debug' | 'info' | 'warn' | 'error' = 'info') {}

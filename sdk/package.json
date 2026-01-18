@@ -1,10 +1,33 @@
 {
-    "name": "@pipeli/sdk",
-    "version": "0.1.0",
+    "name": "pipeli-sdk",
+    "version": "0.1.1",
     "description": "Pipeline as Code SDK for Healthcare Data Integration",
     "main": "dist/index.js",
     "types": "dist/index.d.ts",
     "license": "MIT",
+    "author": "Pipeli Team",
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/pipeli/pipeli.git",
+        "directory": "sdk"
+    },
+    "bugs": {
+        "url": "https://github.com/pipeli/pipeli/issues"
+    },
+    "homepage": "https://pipeli.org",
+    "keywords": [
+        "pipeline",
+        "healthcare",
+        "hl7",
+        "dicom",
+        "jahis",
+        "integration",
+        "typescript",
+        "bento"
+    ],
+    "engines": {
+        "node": ">=20.0.0"
+    },
     "publishConfig": {
         "access": "public"
     },

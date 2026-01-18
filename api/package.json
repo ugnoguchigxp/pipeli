@@ -1,5 +1,5 @@
 {
-    "name": "@pipeli/api",
+    "name": "pipeli-api",
     "version": "0.1.0",
     "description": "GDPR/HIPAA compliant data anonymization API service",
     "license": "MIT",

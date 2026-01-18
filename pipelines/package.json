@@ -1,5 +1,5 @@
 {
-    "name": "@pipeli/pipelines",
+    "name": "pipeli-pipelines",
     "version": "1.0.0",
     "description": "Pipeli pipeline definitions",
     "scripts": {
@@ -8,7 +8,7 @@
         "run": "ts-node scripts/run.ts"
     },
     "dependencies": {
-        "@pipeli/sdk": "file:../sdk",
+        "pipeli-sdk": "file:../sdk",
         "drizzle-orm": "^0.30.0",
         "pg": "^8.11.3"
     },

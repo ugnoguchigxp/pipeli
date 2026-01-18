@@ -71,9 +71,9 @@ bun run run vendor-a-patient-sync
 SDK の `PipelineRunner` クラスを使用します。
 
 ```typescript
-import { PipelineRunner } from '@pipeli/sdk';
+import { PipelineRunner } from 'pipeli-sdk';
 
-const runner = new PipelineRunner();
+const runner = new PipelineRunner({ distDir: './pipelines/dist' });
 await runner.run('vendor-a-patient-sync');
 ```
 
@@ -119,8 +119,8 @@ v1.1.0 から、HL7や固定長データのベンダー固有の差異を**プ�
 ### 簡単な例（Profileベース）
 
 ```typescript
-import { Pipeline, Source, Transform, Sink, profileRegistry } from '@pipeli/sdk';
-import { patients } from '../../db/schema';
+import { Pipeline, Source, Transform, Sink, profileRegistry } from 'pipeli-sdk';
+import { patients } from './db/schema';
 
 // プロファイルを取得（事前に登録済み）
 const profile = profileRegistry.get('vendor_x', 'adt-profile');
@@ -142,7 +142,7 @@ const pipeline = new Pipeline({
   output: Sink.postgres({
     schema: patients,
     mode: 'upsert',
-    idempotencyKey: ['vendor', 'facility', 'sourceId'],
+    idempotencyKey: ['sourceId'],
     mapping: {
       vendor: { literal: 'vendor_x' },
       facility: { literal: 'hosp_001' },

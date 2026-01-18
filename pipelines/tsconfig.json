@@ -9,7 +9,7 @@
         "forceConsistentCasingInFileNames": true,
         "baseUrl": ".",
         "paths": {
-            "@org/ingestion-sdk": ["../sdk/src/index.ts"]
+            "pipeli-sdk": ["../sdk/src/index.ts"]
         }
     },
     "include": ["src/**/*", "../db/schema.ts"]

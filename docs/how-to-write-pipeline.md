@@ -18,7 +18,7 @@
 すべてのパイプラインファイルは `pipelines/src/` 配下に配置し、以下の構造を持つ必要があります。
 
 ```typescript
-import { Pipeline, Source, Transform, Sink } from '@pipeli/sdk';
+import { Pipeline, Source, Transform, Sink } from 'pipeli-sdk';
 import { patients } from '../../db/schema'; // Drizzle スキーマを必ずインポート
 
 const pipeline = new Pipeline({
@@ -136,7 +136,7 @@ Transform.decode('shift_jis')  // Shift-JIS から UTF-8 へ
 固定長プロファイルに基づいてデータをパースします。レコード種別の判定、文字エンコーディング変換、トリム規則などを適切に処理します。
 
 ```typescript
-import { profileRegistry } from '@pipeli/sdk';
+import { profileRegistry } from 'pipeli-sdk';
 
 const profile = profileRegistry.get('vendor_c', 'patient-fixed');
 
@@ -168,7 +168,7 @@ const vendorCFixedProfile: FixedWidthProfile = {
 HL7プロファイルに基づいてメッセージをパースします。標準セグメントとベンダー拡張（Z-segment）を適切に処理し、正規化されたフィールド名で出力します。
 
 ```typescript
-import { profileRegistry } from '@pipeli/sdk';
+import { profileRegistry } from 'pipeli-sdk';
 
 const profile = profileRegistry.get('vendor_a', 'adt-profile');
 
@@ -294,8 +294,8 @@ AI アシスタントがコードを生成する際は、以下のステップ�
 
 ### HL7 MLLP to Postgres (UPSERT)
 ```typescript
-import { Pipeline, Source, Transform, Sink, profileRegistry } from '@pipeli/sdk';
-import { patients } from '../../db/schema';
+import { Pipeline, Source, Transform, Sink, profileRegistry } from 'pipeli-sdk';
+import { patients } from './db/schema';
 
 // プロファイルを取得（事前に登録済み）
 const profile = profileRegistry.get('vendor_x', 'adt-profile');
@@ -316,7 +316,7 @@ const pipeline = new Pipeline({
   output: Sink.postgres({
     schema: patients,
     mode: 'upsert',
-    idempotencyKey: ['vendor', 'facility', 'sourceId'],
+    idempotencyKey: ['sourceId'],
     mapping: {
       vendor: { literal: 'vendor_x' },
       facility: { literal: 'hosp_001' },
@@ -332,7 +332,7 @@ pipeline.synth('./dist');
 
 ### SFTP CSV to Postgres (INSERT)
 ```typescript
-import { Pipeline, Source, Transform, Sink } from '@pipeli/sdk';
+import { Pipeline, Source, Transform, Sink } from 'pipeli-sdk';
 import { patients } from '../../db/schema';
 
 const pipeline = new Pipeline({
@@ -402,7 +402,7 @@ HL7や固定長データのベンダー固有の差異を**プロファイル**�
 
 ```typescript
 // profiles/vendor-a-adt.ts
-import type { HL7Profile } from '@pipeli/sdk';
+import type { HL7Profile } from 'pipeli-sdk';
 
 export const vendorAAdtProfile: HL7Profile = {
   id: 'adt-profile',
@@ -453,7 +453,7 @@ export const vendorAAdtProfile: HL7Profile = {
 
 ```typescript
 // profiles/vendor-c-fixed.ts
-import type { FixedWidthProfile } from '@pipeli/sdk';
+import type { FixedWidthProfile } from 'pipeli-sdk';
 
 export const vendorCFixedProfile: FixedWidthProfile = {
   id: 'patient-fixed',
@@ -498,7 +498,7 @@ export const vendorCFixedProfile: FixedWidthProfile = {
 
 ```typescript
 // profiles/index.ts
-import { profileRegistry } from '@pipeli/sdk';
+import { profileRegistry } from 'pipeli-sdk';
 import { vendorAAdtProfile } from './vendor-a-adt.js';
 import { vendorBAdtProfile } from './vendor-b-adt.js';
 import { vendorCFixedProfile } from './vendor-c-fixed.js';
@@ -518,7 +518,7 @@ profileRegistry.register(vendorCFixedProfile);
 #### HL7パイプライン（Profileベース）
 
 ```typescript
-import { Pipeline, Source, Transform, Sink, profileRegistry } from '@pipeli/sdk';
+import { Pipeline, Source, Transform, Sink, profileRegistry } from 'pipeli-sdk';
 import { patients } from '../../db/schema';
 
 // プロファイルを取得
@@ -541,7 +541,7 @@ const pipeline = new Pipeline({
   output: Sink.postgres({
     schema: patients,
     mode: 'upsert',
-    idempotencyKey: ['vendor', 'facility', 'sourceId'],
+    idempotencyKey: ['sourceId'],
     mapping: {
       vendor: { literal: 'vendor_a' },
       facility: { literal: 'hospital_001' },
@@ -559,7 +559,7 @@ pipeline.synth('./dist');
 #### 固定長パイプライン（Profileベース）
 
 ```typescript
-import { Pipeline, Source, Transform, Sink, profileRegistry } from '@pipeli/sdk';
+import { Pipeline, Source, Transform, Sink, profileRegistry } from 'pipeli-sdk';
 import { patients } from '../../db/schema';
 
 const profile = profileRegistry.get('vendor_c', 'patient-fixed');
@@ -585,7 +585,7 @@ const pipeline = new Pipeline({
   output: Sink.postgres({
     schema: patients,
     mode: 'upsert',
-    idempotencyKey: ['vendor', 'facility', 'sourceId'],
+    idempotencyKey: ['sourceId'],
     mapping: {
       vendor: { literal: 'vendor_c' },
       facility: { literal: 'clinic_002' },
